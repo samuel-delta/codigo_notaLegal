@@ -2,6 +2,7 @@ const { defineConfig } = require('cypress');
 const webpack = require('@cypress/webpack-preprocessor');
 const { addCucumberPreprocessorPlugin } = require('@badeball/cypress-cucumber-preprocessor');
 const path = require('path');
+const fs = require('fs');
 const { readPDF, readTXT, readExcel } = require('./cypress/support/index.js');
 
 module.exports = defineConfig({
@@ -52,6 +53,13 @@ module.exports = defineConfig({
         readPDF,
         readTXT,
         readExcel,
+        deleteDownloads() {
+        const downloadsFolder = path.join(__dirname, 'cypress', 'downloads');
+        fs.readdirSync(downloadsFolder).forEach(file => {
+          fs.unlinkSync(path.join(downloadsFolder, file));
+        });
+        return null;
+        },
       });
 
       config.env.stepDefinitions = 'cypress/e2e/step_definitions/**/*.js';

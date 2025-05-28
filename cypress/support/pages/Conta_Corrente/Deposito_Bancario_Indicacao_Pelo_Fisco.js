@@ -8,7 +8,7 @@ export const depositoBancarioIndicacaoElements = {
   botaoExportar: 'button:contains("Exportar")',
   botaoIndicar: 'button:contains("Indicar")',
   botaoLimpar: 'button:contains("Limpar")',
-
+ 
   // INPUTS
   inputCpf: '#cpfCnpj',
   inputSeqBeneficiario: '#seqBeneficiario',
