@@ -11,11 +11,16 @@ export const manterBilheteElements = {
   botaoOpcaoExportarExcel: '.export-options li:nth-child(1)',
   botaoOpcaoExportarTXT: '.export-options li:nth-child(2)',
   botaoOpcaoExportarPDF: '.export-options li:nth-child(3)',
+  botaoExtracaoDeDados: 'span:contains("Extração de Dados")',
   
   //INPUTS
   inputCPF: '#numeroCpf',
   inputNumeroDoBilhete: '#numeroBilhete',
-  inputNumeroDoSorteiro: '#numeroSorteio',
+  inputNumeroDoSorteio: '#numeroSorteio',
+  //Inputs do "Extrair Dados"
+  inputCPFNoExtracaoDeDados: 'label:contains("Valor Prêmio") + div input#numeroCpf',
+  inputNumeroDoBilheteNoExtracaoDeDados: 'label:contains("Valor Prêmio") + div input#numeroBilhete',
+  inputNumeroDoSorteioNoExtracaoDeDados: 'label:contains("Valor Prêmio") + div input#numeroSorteio',
 
   //TABELAS
   tabelaSorteio: 'tbody.p-datatable-tbody tr',
@@ -37,3 +42,30 @@ export const manterBilheteElements = {
 //      cy.wrap($checkboxes[i]).click({ force: true });
 //      }
 //    });
+
+//Salva o valor dos 2 primeiros dados da tabela -> Para salvar mais valores só mudar o valor "2" no "ifn(index < 2)"
+//  const dadosTabela = [];
+
+//  cy.get('tbody tr').each(($row, index) => {
+//    if (index < 2) { 
+//      const dadosLinha = [];
+//      cy.wrap($row).find('td').each(($cell) => {
+//      const texto = $cell
+//        .contents()
+//       .filter(function() {
+//        return this.nodeType === 3; // Só pega texto puro, ignora spans, divs e labels
+//        })
+//       .text()
+//        .trim();
+//
+//    if (texto) {
+//      dadosLinha.push(texto);
+//      }
+//    }).then(() => {
+//      dadosTabela.push(dadosLinha);
+//    });
+//    }
+//    }).then(() => {
+//      cy.wrap(dadosTabela).as('dadosTabela');
+//      Cypress.env('dadosTabelaExtraidos', dadosTabela);
+//    });   

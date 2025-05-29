@@ -20,7 +20,7 @@ Quando('o usuário preencher os parâmetros para consulta', () => {
   cy.origin('https://homol-ccr.fazenda.df.gov.br', { args: { el } }, ({ el }) => {
     cy.get(el.inputCPF).type('82016909153');
     cy.get(el.inputNumeroDoBilhete).type('4072');
-    cy.get(el.inputNumeroDoSorteiro).type('00122');
+    cy.get(el.inputNumeroDoSorteio).type('00122');
   });
 });
 
@@ -81,7 +81,7 @@ Dado('que o usuário deseja exportar os dados da consulta em PDF, EXCEL E TXT es
 Quando('preencher campos obrigatórios CT03', () => {
   cy.origin('https://homol-ccr.fazenda.df.gov.br', { args: { el } }, ({ el }) => {
     cy.get(el.inputCPF).type('82016909153');
-    cy.get(el.inputNumeroDoSorteiro).type('00122');
+    cy.get(el.inputNumeroDoSorteio).type('00122');
   });
 });
 
@@ -102,62 +102,7 @@ Quando('acionar o botão Exportar selecionando as opções “PDF; EXCEL; TXT”
       }
     });
 
-    cy.get(el.botaoExportar).click();
-    cy.get(el.botaoOpcaoExportarPDF).click();
-    cy.get(el.load, { timeout: 10000 }).should('not.exist'); //Espera load sumir para seguir
-    cy.get(el.botaoExportar).click();
-    cy.get(el.botaoOpcaoExportarTXT).click();
-    cy.get(el.load, { timeout: 10000 }).should('not.exist');
-    cy.get(el.botaoExportar).click();
-    cy.get(el.botaoOpcaoExportarExcel).click();
-    cy.readFile('cypress/downloads/ManterBilhetes.xlsx', { timeout: 15000 }).should('exist');
-  });
-});
-
-Entao('o sistema apresenta o arquivo de acordo com o selecionado CT03', () => {
-  cy.readFile('cypress/downloads/ManterBilhetes.pdf', { timeout: 15000 }).should('exist');
-  cy.readFile('cypress/downloads/ManterBilhetes.txt', { timeout: 15000 }).should('exist');
-  cy.readFile('cypress/downloads/ManterBilhetes.xlsx', { timeout: 15000 }).should('exist');
-  cy.task('deleteDownloads'); // Deleta os arquivos dentro da pasta download
-});
-
-
-
-
-//CT04: Extrair dados [Excel e TXT]
-Dado('que o usuário deseja extrair os dados da consulta em TXT, EXCEL e PDF estando na pagina Manter Bilhete CT04', () => {
-  cy.login_sistema('jrsneto', 'jrsneto');
-  cy.get('#CC2').click();
-  cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
-    cy.get(el.menuSorteio).eq(1).click();
-    cy.get(el.subMenuManterBilhete).click();
-  });
-});
-
-Quando('preencher campos obrigatórios CT04', () => {
-  cy.origin('https://homol-ccr.fazenda.df.gov.br', { args: { el } }, ({ el }) => {
-    cy.get(el.inputCPF).type('82016909153');
-    cy.get(el.inputNumeroDoSorteiro).type('00122');
-  });
-});
-
-Quando('aciona o botão Consultar CT04', () => {
-  cy.origin('https://homol-ccr.fazenda.df.gov.br', { args: { el } }, ({ el }) => {
-    cy.get(el.botaoConsultar).click();
-    cy.get(el.tabelaSorteio, { timeout: 30000 }).should('exist'); //Epera a tabela aparecer 
-  });
-});
-
-Quando('selecionar as opções que deseja exportar CT04', () => {
-  cy.origin('https://homol-ccr.fazenda.df.gov.br', { args: { el } }, ({ el }) => {
-    //Seleciona os três prmeiros
-    cy.get('tbody input[type="checkbox"]').then(($checkboxes) => {
-      for (let i = 0; i < 3 && i < $checkboxes.length; i++) {
-      cy.wrap($checkboxes[i]).click({ force: true });
-      }
-    });
-
-  //Salva o valor dos 3 primeiros dados da tabela
+    //Salva o valor dos 3 primeiros dados da tabela
   const dadosTabela = [];
 
   cy.get('tbody tr').each(($row, index) => {
@@ -183,25 +128,20 @@ Quando('selecionar as opções que deseja exportar CT04', () => {
       cy.wrap(dadosTabela).as('dadosTabela');
       Cypress.env('dadosTabelaExtraidos', dadosTabela);
     });    
-  });
-});
 
-
-Quando('acionar o botão Exportar selecionando as opções “PDF; EXCEL; TXT” CT04', () => {
-  cy.origin('https://homol-ccr.fazenda.df.gov.br', { args: { el } }, ({ el }) => {
     cy.get(el.botaoExportar).click();
     cy.get(el.botaoOpcaoExportarPDF).click();
-    cy.get(el.load, { timeout: 20000 }).should('not.exist'); //Espera load sumir para seguir
+    cy.get(el.load, { timeout: 10000 }).should('not.exist'); //Espera load sumir para seguir
     cy.get(el.botaoExportar).click();
     cy.get(el.botaoOpcaoExportarTXT).click();
-    cy.get(el.load, { timeout: 20000 }).should('not.exist');
+    cy.get(el.load, { timeout: 10000 }).should('not.exist');
     cy.get(el.botaoExportar).click();
     cy.get(el.botaoOpcaoExportarExcel).click();
     cy.readFile('cypress/downloads/ManterBilhetes.xlsx', { timeout: 15000 }).should('exist');
   });
 });
 
-Entao('o sistema apresenta o arquivo com os dados de acordo com os selecionados CT06', () => {
+Entao('o sistema apresenta o arquivo com os dados de acordo com os selecionados CT03.1', () => {
   const dadosEsperados = Cypress.env('dadosTabelaExtraidos');
 
   cy.validarArquivosExportados(
@@ -210,4 +150,56 @@ Entao('o sistema apresenta o arquivo com os dados de acordo com os selecionados 
     'cypress/downloads/ManterBilhetes.xlsx',
   dadosEsperados
   );
+});
+
+
+//CT04: Extrair dados [Excel e TXT]
+
+Dado('que o usuário deseja extrair os dados da consulta em TXT e EXCEL estando na pagina Manter Bilhete CT04', () => {
+  cy.login_sistema('jrsneto', 'jrsneto');
+  cy.get('#CC2').click();
+  cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
+    cy.get(el.menuSorteio).eq(1).click();
+    cy.get(el.subMenuManterBilhete).click();
+  });
+});
+
+Dado('o usuário selecionar o botão “Extração de Dados” CT04.1', () => {
+  cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
+    cy.get(el.botaoExtracaoDeDados).click();
+  });
+});
+
+Dado('preencher os parâmetros CT04.1', () => {
+  cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
+    cy.get(el.inputCPFNoExtracaoDeDados).type('82016909153');
+    cy.get(el.inputNumeroDoBilheteNoExtracaoDeDados).type('4072');
+    cy.get(el.inputNumeroDoSorteioNoExtracaoDeDados).type('00122');
+  });
+});
+
+Dado('selecionar a opção “Exportar” selecionando as opções “EXCEL; TXT” CT04', () => {
+  cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
+    cy.get(el.botaoExportar).click();
+    cy.get(el.botaoOpcaoExportarTXT).click();
+    cy.wait(5000);
+    cy.get(el.botaoExportar).click();
+    cy.get(el.botaoOpcaoExportarExcel).click();
+    cy.readFile('cypress/downloads/ManterBilhetes.xlsx', { timeout: 15000 }).should('exist');
+  });
+});
+
+Entao('o sistema vai apresentar o arquivo com os dados passados no parametro CT04', () => {
+  cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
+  cy.task('readTXT', 'cypress/downloads/BilhetePremiado.txt').then((txt) => {
+  expect(txt).to.include('82016909153');
+  expect(txt).to.include('4072');
+  expect(txt).to.include('00122');
+  });
+  cy.task('readExcel', 'cypress/downloads/BilhetePremiado.xlsx').then((txt) => {
+  expect(txt).to.include('82016909153');
+  expect(txt).to.include('4072');
+  expect(txt).to.include('00122');
+  });
+  });
 });

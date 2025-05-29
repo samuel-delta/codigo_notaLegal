@@ -1,9 +1,9 @@
-export const consultarBilhetePremiadoElements = {
+export const desbloquearPremioElements = {
   // MENUS E SUBMENOS
   menuSorteio: 'ul.layout-menu li a span:contains("Sorteio")',
   //Usa .eq(1) para acessar o certo
   //Ex: cy.get(el.menuSorteio).eq(1).click();
-  subMenuConsultarBilhetePremiado: 'span:contains("Consultar Bilhetes Premiado")',
+  subMenuDesbloquearPremio: 'span:contains("Desbloquear Prêmio")',
 
   //BOTOES
   botaoConsultar: 'button:contains("Consultar")',
@@ -13,12 +13,11 @@ export const consultarBilhetePremiadoElements = {
   botaoOpcaoExportarPDF: '.export-options li:nth-child(3)',
   botaoExtracaoDeDados: 'span:contains("Extração de Dados")',
 
-
   //INPUTS
+  inputCPF: '#cpfCnpj',
+  inputValorDoPremio: '#valorLiquido',
   inputNumeroDoSorteio: '#numeroSorteio',
-  inputPremio: '#premio',
-  inputValorDoPremio: '#valorPremio',
-   //Inputs do "Extrair Dados"
+  //Inputs do "Extrair Dados"
   inputValorDoPremioNoExtracaoDeDados: 'label:contains("Valor Prêmio") + div input#valorPremio',
 
 
@@ -30,7 +29,6 @@ export const consultarBilhetePremiadoElements = {
   // Exemplo: cy.get(el.load, { timeout: 10000 }).should('not.exist'); -> Espera load sumir por 10 segundos para seguir
 };
 
-
 //CODIGOS DE SUPORTE:
 
 //SELECIONANDO CHECKBOXES
@@ -41,8 +39,6 @@ export const consultarBilhetePremiadoElements = {
 //      cy.wrap($checkboxes[i]).click({ force: true });
 //      }
 //    });
-
-//SALVAR VALORES DA TABELA
 
 //Salva o valor dos 2 primeiros dados da tabela -> Para salvar mais valores só mudar o valor "2" no "ifn(index < 2)"
 //  const dadosTabela = [];
