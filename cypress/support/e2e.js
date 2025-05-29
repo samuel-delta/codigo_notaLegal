@@ -15,4 +15,5 @@
 
 import './commands.js';
 import './commands/login_commands.js';
+import './commands/validar_arquivos_exportados.js';
 

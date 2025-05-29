@@ -1,9 +1,9 @@
-export const consultarBilhetePremiadoElements = {
+export const manterBilheteElements = {
   // MENUS E SUBMENOS
   menuSorteio: 'ul.layout-menu li a span:contains("Sorteio")',
   //Usa .eq(1) para acessar o certo
   //Ex: cy.get(el.menuSorteio).eq(1).click();
-  subMenuConsultarBilhetePremiado: 'span:contains("Consultar Bilhetes Premiado")',
+  subMenuManterBilhete: 'span:contains("Manter Bilhete")',
 
   //BOTOES
   botaoConsultar: 'button:contains("Consultar")',
@@ -11,11 +11,11 @@ export const consultarBilhetePremiadoElements = {
   botaoOpcaoExportarExcel: '.export-options li:nth-child(1)',
   botaoOpcaoExportarTXT: '.export-options li:nth-child(2)',
   botaoOpcaoExportarPDF: '.export-options li:nth-child(3)',
-
+  
   //INPUTS
-  inputNumeroDoSorteio: '#numeroSorteio',
-  inputPremio: '#premio',
-  inputValorDoPremio: '#valorPremio',
+  inputCPF: '#numeroCpf',
+  inputNumeroDoBilhete: '#numeroBilhete',
+  inputNumeroDoSorteiro: '#numeroSorteio',
 
   //TABELAS
   tabelaSorteio: 'tbody.p-datatable-tbody tr',

@@ -4,18 +4,7 @@ const Dado = Given;
 const Quando = When;
 const Entao = Then;
 
-// Colocando o normalizarCampo aqui para poder usar no PDF/TXT e Excel lá em baixo
-function normalizarCampo(campo) {
-  if (campo === undefined || campo === null) return '';
-  return String(campo)
-    .toLowerCase()
-    .replace(/\s+/g, '')
-    .replace(/r\$\s?/g, '')
-    .replace(/\./g, '')
-    .replace(/,00$|\.00$|,0$|\.0$/g, '')
-    .replace(/[^\wÀ-ÿ0-9]/g, '')
-    .trim();
-}
+
 
 import { consultarBilhetePremiadoElements as el } from '@pages/Sorteio/Consultar_Bilhete_Premiado.js';
 //Cenário: CT01: Consultar bilhete premiado
@@ -139,7 +128,7 @@ Quando('selecionar um ou mais registros CT04', () => {
     }
     });
   //Salva o valor dos 3 primeiros dados da tabela
-const dadosTabela = [];
+  const dadosTabela = [];
 
   cy.get('tbody tr').each(($row, index) => {
     if (index < 3) { 
@@ -182,46 +171,16 @@ Quando('acionar o botão Exportar selecionando as opções PDF, TXT e EXCEL CT04
 });
 
 Entao('o sistema apresenta o arquivo com os dados de acordo com os selecionados CT04', () => {
+  
   const dadosEsperados = Cypress.env('dadosTabelaExtraidos');
-  
-  cy.task('readTXT', 'cypress/downloads/BilhetePremiado.txt').then((txtText) => {
-    const textoNormalizado = normalizarCampo(txtText);
-  
-    dadosEsperados.forEach((linha, linhaIndex) => {
-      linha.forEach((campo, campoIndex) => {
-        const campoNormalizado = normalizarCampo(campo);
-        expect(textoNormalizado, `TXT - Erro na linha ${linhaIndex + 1}, coluna ${campoIndex + 1}: "${campo}"`).to.include(campoNormalizado);
-        });
-    });
-  });
 
-  cy.task('readPDF', 'cypress/downloads/BilhetePremiado.pdf').then((PDFText) => {
-    const textoNormalizado = normalizarCampo(PDFText);
-  
-    dadosEsperados.forEach((linha, linhaIndex) => {
-      linha.forEach((campo, campoIndex) => {
-        const campoNormalizado = normalizarCampo(campo);
-        expect(textoNormalizado, `PDF - Erro na linha ${linhaIndex + 1}, coluna ${campoIndex + 1}: "${campo}"`).to.include(campoNormalizado);
-        });
-    });
-  });
+  cy.validarArquivosExportados(
+    'cypress/downloads/BilhetePremiado.txt',
+    'cypress/downloads/BilhetePremiado.pdf',
+    'cypress/downloads/BilhetePremiado.xlsx',
+  dadosEsperados
+  );
 
-  cy.task('readExcel', 'cypress/downloads/BilhetePremiado.xlsx').then((ExcelText) => {
-  const textoExcel = ExcelText.flat().join(' ');
-  const textoNormalizado = normalizarCampo(textoExcel);
-
-  dadosEsperados.forEach((linha, linhaIndex) => {
-    linha.forEach((campo, campoIndex) => {
-      const campoNormalizado = normalizarCampo(campo);
-      expect(
-        textoNormalizado,
-        `Excel - Erro na linha ${linhaIndex + 1}, coluna ${campoIndex + 1}: "${campo}"`
-      ).to.include(campoNormalizado);
-    });
-  });
-  });
-  
-  cy.task('deleteDownloads'); // Deleta os arquivos da pasta download
 });
 
 

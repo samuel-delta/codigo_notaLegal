@@ -27,8 +27,9 @@ const readExcel = (pathToExcel) => {
       const workbook = XLSX.read(fileBuffer, { type: 'buffer' });
       const sheetName = workbook.SheetNames[0];
       const sheet = workbook.Sheets[sheetName];
-      const data = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // lê como array de arrays
-      resolve(data);
+      const data = XLSX.utils.sheet_to_json(sheet, { header: 1 }); // array de arrays
+      const dataSemCabecalhos = data.slice(3); // <--- Pula as 3 primeiras linhas
+      resolve(dataSemCabecalhos);
     } catch (error) {
       reject(error);
     }
