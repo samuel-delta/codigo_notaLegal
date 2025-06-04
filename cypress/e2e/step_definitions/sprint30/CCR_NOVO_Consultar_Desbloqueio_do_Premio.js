@@ -16,7 +16,7 @@ Dado('o usuario acessa o sistema CC2', () => {
   cy.get('#CC2').click()
 });
 
-Dado('o usuario acessa o menu Sorteio, Desbloquear Premio, Consultar', () => {
+Dado('o usuario acessa o menu Sorteio, De sbloquear Premio, Consultar', () => {
   cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
     cy.get(el.menuSorteio).eq(1).click();
     cy.get(el.subMenuDesbloquearPremio).click();

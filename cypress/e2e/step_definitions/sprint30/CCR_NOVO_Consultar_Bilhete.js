@@ -173,8 +173,8 @@ Dado('o usuário selecionar o botão “Extração de Dados” CT04.1', () => {
 Dado('preencher os parâmetros CT04.1', () => {
   cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
     cy.get(el.inputCPFNoExtracaoDeDados).type('82016909153');
-    cy.get(el.inputNumeroDoBilheteNoExtracaoDeDados).type('4072');
-    cy.get(el.inputNumeroDoSorteioNoExtracaoDeDados).type('00122');
+    cy.get(el.inputNumeroDoBilheteNoExtracaoDeDados).eq(1).type('4072');
+    cy.get(el.inputNumeroDoSorteioNoExtracaoDeDados).eq(1).type('00122');
   });
 });
 

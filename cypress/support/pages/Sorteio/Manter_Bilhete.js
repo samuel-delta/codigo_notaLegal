@@ -18,9 +18,9 @@ export const manterBilheteElements = {
   inputNumeroDoBilhete: '#numeroBilhete',
   inputNumeroDoSorteio: '#numeroSorteio',
   //Inputs do "Extrair Dados"
-  inputCPFNoExtracaoDeDados: 'label:contains("Valor Prêmio") + div input#numeroCpf',
-  inputNumeroDoBilheteNoExtracaoDeDados: 'label:contains("Valor Prêmio") + div input#numeroBilhete',
-  inputNumeroDoSorteioNoExtracaoDeDados: 'label:contains("Valor Prêmio") + div input#numeroSorteio',
+  inputCPFNoExtracaoDeDados: 'label:contains("CPF") + div input#numeroCpf',
+  inputNumeroDoBilheteNoExtracaoDeDados: 'span:contains("Parâmetros de Consulta") + div input#numeroBilhete',
+  inputNumeroDoSorteioNoExtracaoDeDados: 'span:contains("Parâmetros de Consulta") + div input#numeroSorteio',
 
   //TABELAS
   tabelaSorteio: 'tbody.p-datatable-tbody tr',
