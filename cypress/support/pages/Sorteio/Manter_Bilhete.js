@@ -18,9 +18,9 @@ export const manterBilheteElements = {
   inputNumeroDoBilhete: '#numeroBilhete',
   inputNumeroDoSorteio: '#numeroSorteio',
   //Inputs do "Extrair Dados"
-  inputCPFNoExtracaoDeDados: 'label:contains("CPF") + div input#numeroCpf',
-  inputNumeroDoBilheteNoExtracaoDeDados: 'span:contains("Parâmetros de Consulta") + div input#numeroBilhete',
-  inputNumeroDoSorteioNoExtracaoDeDados: 'span:contains("Parâmetros de Consulta") + div input#numeroSorteio',
+  inputCPFNoExtracaoDeDados: '.ng-untouched.ng-star-inserted > :nth-child(1) > [style="display: flex;"] > #numeroCpf',
+  inputNumeroDoBilheteNoExtracaoDeDados: '.ng-untouched.ng-star-inserted > :nth-child(2) > [style="display: flex;"] > #numeroBilhete',
+  inputNumeroDoSorteioNoExtracaoDeDados: '.ng-untouched.ng-star-inserted > :nth-child(3) > [style="display: flex;"] > #numeroSorteio',
 
   //TABELAS
   tabelaSorteio: 'tbody.p-datatable-tbody tr',

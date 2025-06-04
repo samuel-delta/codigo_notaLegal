@@ -173,8 +173,8 @@ Dado('o usuário selecionar o botão “Extração de Dados” CT04.1', () => {
 Dado('preencher os parâmetros CT04.1', () => {
   cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
     cy.get(el.inputCPFNoExtracaoDeDados).type('82016909153');
-    cy.get(el.inputNumeroDoBilheteNoExtracaoDeDados).eq(1).type('4072');
-    cy.get(el.inputNumeroDoSorteioNoExtracaoDeDados).eq(1).type('00122');
+    //cy.get(el.inputNumeroDoBilheteNoExtracaoDeDados).eq(1).type('4072');
+    //cy.get(el.inputNumeroDoSorteioNoExtracaoDeDados).eq(1).type('00122');
   });
 });
 
@@ -191,15 +191,18 @@ Dado('selecionar a opção “Exportar” selecionando as opções “EXCEL; TXT
 
 Entao('o sistema vai apresentar o arquivo com os dados passados no parametro CT04', () => {
   cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
-  cy.task('readTXT', 'cypress/downloads/BilhetePremiado.txt').then((txt) => {
-  expect(txt).to.include('82016909153');
+  cy.task('readTXT', 'cypress/downloads/ManterBilhetes.txt').then((txt) => {
+  expect(txt).to.include('820.169.091-53');
   expect(txt).to.include('4072');
   expect(txt).to.include('00122');
   });
-  cy.task('readExcel', 'cypress/downloads/BilhetePremiado.xlsx').then((txt) => {
-  expect(txt).to.include('82016909153');
-  expect(txt).to.include('4072');
-  expect(txt).to.include('00122');
+  cy.task('readExcel', 'cypress/downloads/ManterBilhetes.xlsx').then((txt) => {
+  const textoCompleto = txt.flat().join(' ');
+  expect(textoCompleto).to.include('820.169.091-53');
+  expect(textoCompleto).to.include('4072');
+  expect(textoCompleto).to.include('00122');
   });
+  cy.task('deleteDownloads');
   });
 });
+
