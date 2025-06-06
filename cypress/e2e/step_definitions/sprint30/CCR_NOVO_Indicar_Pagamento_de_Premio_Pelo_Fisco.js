@@ -102,3 +102,62 @@ Entao('o sistema não permitirá a indicação de pagamento e exibirá o alerta:
     cy.contains('Para realizar essa ação é necessário selecionar somente um registro na tabela.')
   });
 });
+
+//Cenário: CT03: Indicação de pagamento sem informação bancária
+
+Dado('que o usuário está logado no sistema CRR CT03', () => {
+  cy.login_sistema('jrsneto', 'jrsneto');
+  cy.get('#CC2').click();
+});
+
+
+Dado('acessa a funcionalidade de indicação de pagamento de prêmio pelo fisco CT03', () => {
+  cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
+    cy.get(el.menuSorteio).eq(1).click();
+    cy.get(el.subMenuIndicarPagamentoPremioPeloFisco).click();
+  });
+});
+
+Dado('realiza a consulta fornecendo os dados necessários CT03', () => {
+  cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
+    cy.get(el.inputValorPremio).type('100');
+    cy.get(el.botaoConsultar).click();
+  });
+});
+
+Dado('visualiza a listagem de registros disponíveis CT03', () => {
+  cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
+    cy.get(el.tabelaSorteio, { timeout: 15000 }).should('be.visible');
+  });
+});
+
+Dado('seleciona um único registro para indicação CT03', () => {
+  cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
+    
+  //Seleciona uma conta que não tenha dados bancários
+  cy.get(el.tabelaSorteio).each(($row, idx) => {
+    const $bancoCell = $row.find('td').eq(7);
+    let bancoText = $bancoCell.contents().filter(function() {
+    return this.nodeType === 3; 
+    }).text().trim();
+      cy.log(`Linha ${idx} | Banco: [${bancoText}]`);
+      if (!bancoText.replace(/[\s\- ]+/g, '')) {
+          cy.log(`-> Vai clicar na linha ${idx}`);
+          cy.wrap($row).find('.p-checkbox-box').click({ force: true });
+      return false;
+      }
+    });
+  });
+});
+
+Quando('o usuário clica no botão Indicar e o sistema identifica que o contribuinte não possui indicação bancária cadastrada CT03', () => {
+  cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
+    cy.get(el.botaoIndicar).click();
+  });
+});
+
+Entao('o sistema não permitirá a indicação de pagamento e exibirá o alerta: Indicação bancária não realizada. CT03', () => {
+  cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
+    cy.contains('Indicação bancária não realizada');
+  });
+});

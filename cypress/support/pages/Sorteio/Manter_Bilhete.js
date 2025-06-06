@@ -7,6 +7,7 @@ export const manterBilheteElements = {
 
   //BOTOES
   botaoConsultar: 'button:contains("Consultar")',
+  botaoHistorico: 'button:contains("Histórico")',
   botaoExportar: 'button:contains("Exportar")',
   botaoOpcaoExportarExcel: '.export-options li:nth-child(1)',
   botaoOpcaoExportarTXT: '.export-options li:nth-child(2)',
