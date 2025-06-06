@@ -71,6 +71,7 @@ Entao('o sistema deve apresentar a mensagem MSG2 “Pelo menos um campo deve ser
 
 
 //CT03: Exportar Histórico [TXT, EXCEL E PDF]
+
 Dado('que o usuário deseja exportar os dados da consulta em PDF, EXCEL E TXT estando na pagina Manter Bilhete CT03', () => {
   cy.login_sistema('jrsneto', 'jrsneto');
   cy.get('#CC2').click();
@@ -97,7 +98,7 @@ Quando('aciona o botão Consultar CT03', () => {
 Quando('acionar o botão Exportar selecionando as opções “PDF; EXCEL; TXT” CT03', () => {
   cy.origin('https://homol-ccr.fazenda.df.gov.br', { args: { el } }, ({ el }) => {
 
-    //Seleciona os três prmeiros
+    //Seleciona os três primeiros
     cy.get('tbody input[type="checkbox"]').then(($checkboxes) => {
       for (let i = 0; i < 3 && i < $checkboxes.length; i++) {
       cy.wrap($checkboxes[i]).click({ force: true });

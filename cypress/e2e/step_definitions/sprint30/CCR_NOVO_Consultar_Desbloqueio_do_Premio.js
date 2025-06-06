@@ -193,7 +193,6 @@ Dado('o usuário selecionou alguns registros específicos CT04', () => {
 
 Entao('o sistema deve exportar apenas os registros selecionados CT04', () => {
   const dadosEsperados = Cypress.env('dadosTabelaExtraidos');
-
   cy.validarArquivosExportados(
     'cypress/downloads/DesbloquearPremio.txt',
     'cypress/downloads/DesbloquearPremio.pdf',
