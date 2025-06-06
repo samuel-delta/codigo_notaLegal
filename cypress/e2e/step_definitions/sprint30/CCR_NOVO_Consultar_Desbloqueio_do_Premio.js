@@ -7,7 +7,9 @@ const Entao = Then;
 
 
 import { desbloquearPremioElements as el } from '@pages/Sorteio/Desbloquear_Premio.js';
+
 //Cenário: CT01: Consultar Desbloqueio de Prêmio
+
 Dado('que o usuário deseja realizar a consulta de desbloqueio de prêmio do sorteio do programa de concessão de crédito', () => {
   cy.login_sistema('jrsneto', 'jrsneto');
 });

@@ -1,35 +1,33 @@
-export const consultarBilhetePremiadoElements = {
+export const indicarPagamentoPremioPeloFiscoElements = {
   // MENUS E SUBMENOS
   menuSorteio: 'ul.layout-menu li a span:contains("Sorteio")',
   //Usa .eq(1) para acessar o certo
   //Ex: cy.get(el.menuSorteio).eq(1).click();
-  subMenuConsultarBilhetePremiado: 'span:contains("Consultar Bilhetes Premiado")',
+  subMenuIndicarPagamentoPremioPeloFisco: 'span:contains("Indicar Pagamento de Prêmio pelo Fisco")',
 
+  //INPUTS
+  inputCPF: '#cpfCnpj',
+   //Inputs do "Extrair Dados"
+  inputCPFNoExtracaoDeDados: '.ng-untouched.ng-star-inserted > :nth-child(1) > [style="display: flex;"] > #cpfCnpj',
+  
   //BOTOES
   botaoConsultar: 'button:contains("Consultar")',
+  botaoIndicar: 'button:contains("Indicar")',
+  botaoSalvar: 'button:contains("Salvar")',
   botaoExportar: 'button:contains("Exportar")',
   botaoOpcaoExportarExcel: '.export-options li:nth-child(1)',
   botaoOpcaoExportarTXT: '.export-options li:nth-child(2)',
   botaoOpcaoExportarPDF: '.export-options li:nth-child(3)',
   botaoExtracaoDeDados: 'span:contains("Extração de Dados")',
 
-
-  //INPUTS
-  inputNumeroDoSorteio: '#numeroSorteio',
-  inputPremio: '#premio',
-  inputValorDoPremio: '#valorPremio',
-   //Inputs do "Extrair Dados"
-  inputValorDoPremioNoExtracaoDeDados: 'label:contains("Valor Prêmio") + div input#valorPremio',
-
-
-  //TABELAS
+   //TABELAS
   tabelaSorteio: 'tbody.p-datatable-tbody tr',
 
   //LOAD
   load: '.p-dialog-mask.p-component-overlay', // Colocando aqui para usar para esperar o load terminar antes de seguir codigo
   // Exemplo: cy.get(el.load, { timeout: 10000 }).should('not.exist'); -> Espera load sumir por 10 segundos para seguir
-};
 
+};
 
 //CODIGOS DE SUPORTE:
 
@@ -49,33 +47,3 @@ export const consultarBilhetePremiadoElements = {
 //        cy.get('tbody input[type="checkbox"]').eq(i).click({ force: true });
 //        cy.wait(300);
 //    }
-
-
-//SALVAR VALORES DA TABELA
-
-//Salva o valor dos 2 primeiros dados da tabela -> Para salvar mais valores só mudar o valor "2" no "ifn(index < 2)"
-//  const dadosTabela = [];
-
-//  cy.get('tbody tr').each(($row, index) => {
-//    if (index < 2) { 
-//      const dadosLinha = [];
-//      cy.wrap($row).find('td').each(($cell) => {
-//      const texto = $cell
-//        .contents()
-//       .filter(function() {
-//        return this.nodeType === 3; // Só pega texto puro, ignora spans, divs e labels
-//        })
-//       .text()
-//        .trim();
-//
-//    if (texto) {
-//      dadosLinha.push(texto);
-//      }
-//    }).then(() => {
-//      dadosTabela.push(dadosLinha);
-//    });
-//    }
-//    }).then(() => {
-//      cy.wrap(dadosTabela).as('dadosTabela');
-//      Cypress.env('dadosTabelaExtraidos', dadosTabela);
-//    });   

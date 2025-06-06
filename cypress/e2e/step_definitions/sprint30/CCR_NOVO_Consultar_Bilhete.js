@@ -6,7 +6,9 @@ const Entao = Then;
 
 
 import { manterBilheteElements as el } from '@pages/Sorteio/Manter_Bilhete.js';
+
 //Cenário: CT01: Consultar bilhete premiado
+
 Dado('que o usuário deseja consultar o bilhete no sorteio do programa de concessão de credito estando na pagina Manter Bilhete', () => {
   cy.login_sistema('jrsneto', 'jrsneto');
   cy.get('#CC2').click();
@@ -173,8 +175,6 @@ Dado('o usuário selecionar o botão “Extração de Dados” CT04.1', () => {
 Dado('preencher os parâmetros CT04.1', () => {
   cy.origin('https://homol-ccr.fazenda.df.gov.br/home', { args: { el } }, ({ el }) => {
     cy.get(el.inputCPFNoExtracaoDeDados).type('82016909153');
-    //cy.get(el.inputNumeroDoBilheteNoExtracaoDeDados).eq(1).type('4072');
-    //cy.get(el.inputNumeroDoSorteioNoExtracaoDeDados).eq(1).type('00122');
   });
 });
 

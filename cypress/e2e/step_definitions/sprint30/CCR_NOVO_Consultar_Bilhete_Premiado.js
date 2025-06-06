@@ -7,7 +7,9 @@ const Entao = Then;
 
 
 import { consultarBilhetePremiadoElements as el } from '@pages/Sorteio/Consultar_Bilhete_Premiado.js';
+
 //Cenário: CT01: Consultar bilhete premiado
+
 Dado('que o usuário deseja consultar um bilhete premiado estando na tela Consultar Bilhetes Premiado', () => {
   cy.login_sistema('jrsneto', 'jrsneto');
   cy.get('#CC2').click();

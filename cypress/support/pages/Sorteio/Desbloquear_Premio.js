@@ -40,6 +40,15 @@ export const desbloquearPremioElements = {
 //      }
 //    });
 
+// OU:
+
+//Seleciona os 2 primeiros
+//    for (let i = 0; i < 2; i++) {
+//        cy.get('tbody input[type="checkbox"]').eq(i).click({ force: true });
+//        cy.wait(300);
+//    }
+
+
 //Salva o valor dos 2 primeiros dados da tabela -> Para salvar mais valores só mudar o valor "2" no "ifn(index < 2)"
 //  const dadosTabela = [];
 
