@@ -1,48 +1,43 @@
-export const depositoBancarioIndicacaoElements = {
+export const manterLancamentoFiscoElements = {
   // MENUS E SUBMENOS
   menuContaCorrente: 'span:contains("Conta Corrente")',
-  subMenuDepositoBancario: 'span:contains("Depósito Bancário - Indicação pelo Fisco")',
+  subMenuManterLancamentoFisco: 'span:contains("Manter Lançamento – Fisco")',
 
   //BOTOES
   botaoConsultar: 'button:contains("Consultar")',
-  botaoIndicar: 'button:contains("Indicar")',
+  botaoExportar: 'button:contains("Exportar")',
+  botaoLancar: 'button:contains("Lançar")',
   botaoLimpar: 'button:contains("Limpar")',
   botaoExportar: 'button:contains("Exportar")',
   botaoOpcaoExportarExcel: '.export-options li:nth-child(1)',
   botaoOpcaoExportarTXT: '.export-options li:nth-child(2)',
   botaoOpcaoExportarPDF: '.export-options li:nth-child(3)',
+  botaoExtracaoDeDados: 'span:contains("Extração de Dados")',
   //Botões dos dados bancários da indicação
-  botaoEfetuarIndicacao: 'button:contains("Efetuar Indicação")',
- 
+  botaoEfetuarLancamento: 'button:contains("Efetuar Lançamento")',
+  //Botoes da Extração de Dados
+  botaoExtracaoExtrair: '.export-dropdown > .p-element',
+
   // INPUTS
   inputCpf: '#cpfCnpj',
-  inputSeqBeneficiario: '#seqBeneficiario',
+  inputSeqBeneficiario: '#seqLancFisco',
   //Input dos dados bancários da indicação
   inputIndicacaoRS: '#indicacao',
-  inputAgencia: '#agencia',
-  inputConta: '#conta',
   inputMotivacao: '#motivacao',
+  inputValorDisponivelDoDebito: '#valorDebito',
+  inputValorDisponivelCredito: '#valorCredito',
+  //Input da Extração de Dados
+  inputExtracaoCPF: '.ng-pristine.ng-star-inserted > :nth-child(1) > [style="display: flex;"] > #cpfCnpj',
 
-  //MENSAGENS
-  mensagemDeCampoObrigatorio: 'div.p-toast-detail',
-  mensagemDeAvisoDeIndicacao: 'div.p-toast-detail',
-
-  //DROPROLLS
-  droprollDeIgualdade: '#pn_id_11 > .p-dropdown-trigger',
-  droprollOpcaoMaiorQue: 'li[role="option"][aria-posinset="3"]',
-  //Droproll dos dados bancários da indicação
-  dropSelecionarBanco: '.p-autocomplete > .p-ripple',
-  dropOpcoesDeBanco: 'li.p-autocomplete-item', //no codigo colocar algo como: cy.get(el.dropOpcoes).contains('BANCO DO NORDESTE').click();
-  dropSelecionaTipoDeConta: 'p-dropdown[placeholder="Selecione"]',
-  dropOpcaoTipoContaCorrente: 'li.p-dropdown-item[aria-label="Conta Corrente"]',
-   
 
   //CHECKS
-  checkSelecionarTodos: 'i.pi.pi-stop',
+  checkOpcaoDebito: ':nth-child(2) > .ng-untouched > .p-radiobutton > .p-radiobutton-box',
+  checkOpcaoCredito: ':nth-child(1) > .ng-valid > .p-radiobutton > .p-radiobutton-box',
+  checkOpcaoAmbos: ':nth-child(3) > .ng-valid > .p-radiobutton > .p-radiobutton-box',
 
-   //TABELAS
-  tabelaDepositoBancario: 'tbody.p-datatable-tbody tr',
-
+  //LOAD
+  load: '.p-dialog-mask.p-component-overlay', // Colocando aqui para usar para esperar o load terminar antes de seguir codigo
+  // Exemplo: cy.get(el.load, { timeout: 10000 }).should('not.exist'); -> Espera load sumir por 10 segundos para seguir
 };
 
   

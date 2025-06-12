@@ -8,7 +8,7 @@ export const indicarPagamentoPremioPeloFiscoElements = {
   //INPUTS
   inputCPF: '#cpfCnpj',
   inputValorPremio: '#valorPremio',
-   //Inputs do "Extrair Dados"
+  //Inputs do "Extrair Dados"
   inputCPFNoExtracaoDeDados: '.ng-untouched.ng-star-inserted > :nth-child(1) > [style="display: flex;"] > #cpfCnpj',
   
   //BOTOES

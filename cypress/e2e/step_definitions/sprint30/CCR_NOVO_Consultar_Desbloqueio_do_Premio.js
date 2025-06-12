@@ -40,8 +40,8 @@ Quando('o usuário aciona a opção Consultar', () => {
 
 Entao('o sistema deve exibir a listagem de registros conforme os parâmetros informados', () => {
   cy.origin('https://homol-ccr.fazenda.df.gov.br', { args: { el } }, ({ el }) => {
-  cy.get(el.tabelaSorteio).each(($linha) => {
-  cy.wrap($linha).find('td').eq(1).should('contain.text', '820.169.091-53');
+    cy.get(el.tabelaSorteio).each(($linha) => {
+      cy.wrap($linha).find('td').eq(1).should('contain.text', '820.169.091-53');
   });
   });
 });
