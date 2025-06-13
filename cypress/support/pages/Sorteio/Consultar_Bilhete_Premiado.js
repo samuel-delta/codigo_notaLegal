@@ -18,7 +18,7 @@ export const consultarBilhetePremiadoElements = {
   inputNumeroDoSorteio: '#numeroSorteio',
   inputPremio: '#premio',
   inputValorDoPremio: '#valorPremio',
-   //Inputs do "Extrair Dados"
+  //Inputs do "Extrair Dados"
   inputValorDoPremioNoExtracaoDeDados: 'label:contains("Valor Prêmio") + div input#valorPremio',
 
 

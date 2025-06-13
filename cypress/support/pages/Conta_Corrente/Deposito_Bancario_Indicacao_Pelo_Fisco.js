@@ -13,6 +13,9 @@ export const depositoBancarioIndicacaoElements = {
   botaoOpcaoExportarPDF: '.export-options li:nth-child(3)',
   //Botões dos dados bancários da indicação
   botaoEfetuarIndicacao: 'button:contains("Efetuar Indicação")',
+  //Extração de dados
+  botaoExtracaoDeDados: 'button:contains("Extração de Dados")',
+  inputExtracaoCpf: '.field input#cpfCnpj',
  
   // INPUTS
   inputCpf: '#cpfCnpj',
