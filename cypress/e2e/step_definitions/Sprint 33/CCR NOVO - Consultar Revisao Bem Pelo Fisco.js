@@ -22,7 +22,6 @@ const dadosEsperados1 = [
   '0012001740',
   ];
 
-let dadosDaGrid = [];
 
 // CT01 - Consultar indicações de bens para IPTU/IPVA
 Dado('que o usuário esteja logado no ReceitaWeb BEM_CT01', () => {

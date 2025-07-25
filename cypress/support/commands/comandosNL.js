@@ -10,7 +10,7 @@ Cypress.Commands.add('loginReceitaWeb', () => {
 });
 
 // ACESSAR MENU RECLAMAÇÃO
-Cypress.Commands.add('acessarFuncionalidade', (nome) => {
+Cypress.Commands.add('acessarReclamacao', (nome) => {
   cy.origin(baseUrlCcr, { args: { nome } }, ({ nome }) => {
     cy.get('span').contains(/^Reclamações$/).parents('a').click();
     cy.contains('span', nome).click();
@@ -138,6 +138,20 @@ Cypress.Commands.add('preencherCpfCnpjExtracao', (valor) => {
   });
 });
 
+// PREENCHER RECLAMAÇÃO (EXTRAÇÃO DE DADOS)
+Cypress.Commands.add('preencherReclamacaoExtracao', (reclamacao) => {
+  cy.origin(baseUrlCcr, { args: { reclamacao } }, ({ reclamacao }) => {
+    cy.get('input[id="reclamacao"]:visible', { timeout: 10000 })
+      .first()
+      .should('exist')
+      .should('be.visible')
+      .click({ force: true })
+      .clear({ force: true })
+      .type(reclamacao, { force: true })
+      .should('have.value', reclamacao);
+  });
+});
+
 
 
 // PREENCHER NUMERO RECLAMACAO
@@ -182,7 +196,7 @@ Cypress.Commands.add('preencherFiltroPeriodoExtracao', (periodo) => {
   });
 });
 
-// OPERADORES
+// OPERADORES 
 Cypress.Commands.add('selecionarOperador', (operador) => {
   cy.origin(baseUrlCcr, { args: { operador } }, ({ operador }) => {
     cy.get('p-dropdown').first().click();
@@ -190,11 +204,16 @@ Cypress.Commands.add('selecionarOperador', (operador) => {
     cy.get('li[role="option"]').then($options => {
       const optionExata = Array.from($options).find(option => option.innerText.trim() === operador);
       if (optionExata) {
-        cy.wrap(optionExata).click();
+       cy.wrap(optionExata).click();
       }
-    });
+   });
   });
 });
+
+
+
+
+
 
 
 // VALIDAR PERÍODO NA TABELA (SEM NENHUMA LINHA ANTERIOR AO FILTRO)
@@ -731,6 +750,13 @@ Cypress.Commands.add('limparSequencial', () => {
   });
 });
 
+// LIMPAR CAMPO "RECLAMAÇÃO"
+Cypress.Commands.add('limparReclamacao', () => {
+  cy.origin(baseUrlCcr, () => {
+    cy.get('#reclamacao').clear({ force: true });
+  });
+});
+
 // VALIDAR MENSAGEM DE CAMPOS OBRIGATÓRIOS
 Cypress.Commands.add('validarMensagemCampoObrigatorio', () => {
   cy.origin(baseUrlCcr, () => {
@@ -806,5 +832,14 @@ Cypress.Commands.add('selecionarComboBox', (texto) => {
 });
 
 
-
+// NORMALIZAR TEXTOS
+Cypress.Commands.add('normalizarTexto', (texto) => {
+  return texto
+    .replace(/&nbsp;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .replace(/(\d{4})(\d{2})(\d{2})/g, '$3/$2/$1') // AAAAMMDD → DD/MM/AAAA
+    .replace(/,(\d)(?!\d)/g, ',$10')               // ex: 199,9 → 199,90
+    .toLowerCase()
+    .trim();
+});
 

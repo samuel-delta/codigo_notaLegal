@@ -1,37 +1,37 @@
 # language: pt
 
-Funcionalidade: CCR NOVO - Consultar Análise Reclamação - Análise pelo FISCO
+Funcionalidade: CCR NOVO- Consultar Analise Reclamacao-Analise pelo FISCO
+  
 
-Cenário: CT01 - Consultar análise de reclamação com parâmetros obrigatórios
-  Dado que o usuário esteja logado
-  E que o usuário esteja na funcionalidade "Manter Análise da Reclamação" CT001
-  Quando informar os parâmetros obrigatórios da consulta CT001
-  E acionar o botão Consultar CT001
-  Então o sistema exibe a listagem de registros de acordo com os parâmetros informados CT001
-
-Cenário: CT02 - Consultar análise reclamação sem preencher campos obrigatórios
-  Dado que o usuário esteja logado
-  E que o usuário esteja na funcionalidade "Manter Análise da Reclamação" CT001
-  Quando não informar os parâmetros obrigatórios da consulta CT001
-  E acionar o botão Consultar CT001
-  Então o sistema exibe a mensagem "Pelo menos um campo deve ser preenchido." CT001
+  Contexto:
+    Dado que o usuário esteja logado no ReceitaWeb FISCO_CT01
+    E que o usuário esteja na funcionalidade "Manter Análise da Reclamação" FISCO_CT01
 
 
-Cenário: CT04: Exportar registros selecionados   
-  Dado que o usuário esteja logado
-  E que o usuário tenha realizado uma consulta válida com número de reclamação específico CT004
-  E que o usuário tenha selecionado registros da listagem CT004
-  Quando acionar a opção Exportar CT004
-  Então o sistema exporta apenas os registros selecionados e valida os dados dos arquivos exportados CT004
+   Cenário: CT01 - Consultar analise reclamação- analise pelo FISCO
+    Quando informar os parâmetros obrigatórios da consulta FISCO_CT01
+    E acionar o botão Consultar FISCO_CT01
+    Então o sistema exibe a listagem de registros de acordo com os parâmetros informados FISCO_CT01
 
-Cenário: CT05 - Extração de dados Excel e TXT
-  Dado que o usuário tenha acessado o menu Extração de Dados da funcionalidade CT005
-  Quando preencher os parâmetros da extração CT005
-  E acionar a opção Exportar nos formatos Excel e TXT CT005
-  Então o sistema exporta os arquivos e valida os dados dos arquivos exportados CT005
+  Cenário: CT02 - Consulta sem parâmetros obrigatórios
+    Quando não informar os parâmetros obrigatórios da consulta FISCO_CT02
+    E acionar o botão Consultar FISCO_CT02
+    Então o sistema exibe a mensagem "Pelo menos um campo deve ser preenchido." FISCO_CT02
 
-  Cenário: CT03 - Exportar todos os registros da consulta
-  Dado que o usuário esteja logado
-  E que o usuário tenha realizado uma consulta valida CT001
-  Quando acionar a opção Exportar sem selecionar nenhum registro CT001
-  Então o sistema exporta os arquivos e valida os dados dos arquivos exportados CT001
+  Cenário: CT03 - Exportar todos os dados da consulta
+    Quando o usuário realizar uma consulta válida FISCO_CT03
+    E acionar a opção Exportar sem selecionar nenhum registro FISCO_CT03
+    Então o sistema exporta os arquivos e valida os dados dos arquivos exportados FISCO_CT03
+
+  Cenário: CT04 - Exportar apenas os registros selecionados
+    Quando o usuário realizar uma consulta válida FISCO_CT04
+    E que o usuário tenha selecionado registros da listagem FISCO_CT04
+    E acionar a opção Exportar FISCO_CT04
+    Então o sistema exporta os arquivos e valida os dados dos arquivos exportados FISCO_CT04
+
+    
+  Cenário: CT05 - Extração de dados Excel e TXT
+   Quando o usuario acessar o botão Extração de Dados FISCO_CT05
+   E preencher os parâmetros da extração FISCO_CT05
+   E acionar a opção Exportar nos formatos Excel e TXT FISCO_CT05
+   Então o sistema exporta os arquivos e valida os dados dos arquivos exportados FISCO_CT05
